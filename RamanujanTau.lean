@@ -3,3 +3,5 @@ import RamanujanTau.SmallValues
 import RamanujanTau.Multiplicativity
 import RamanujanTau.HeckeRecurrence
 import RamanujanTau.Congruences
+import RamanujanTau.Congruences.Sigma
+import RamanujanTau.MathlibBridge
