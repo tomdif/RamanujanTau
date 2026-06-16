@@ -3,6 +3,7 @@ import RamanujanTau.SmallValues
 import RamanujanTau.Multiplicativity
 import RamanujanTau.HeckeRecurrence
 import RamanujanTau.HeckeTheory
+import RamanujanTau.HeckeEigenform
 import RamanujanTau.Deligne
 import RamanujanTau.Lehmer
 import RamanujanTau.EulerFactor
