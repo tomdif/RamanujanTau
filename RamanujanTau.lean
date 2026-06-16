@@ -8,6 +8,7 @@ import RamanujanTau.HeckeOperator
 import RamanujanTau.HeckeConstruction
 import RamanujanTau.HeckeReps
 import RamanujanTau.OctonionBridge
+import RamanujanTau.E8Eisenstein
 import RamanujanTau.Deligne
 import RamanujanTau.Lehmer
 import RamanujanTau.EulerFactor
