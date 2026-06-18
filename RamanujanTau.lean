@@ -27,3 +27,4 @@ import RamanujanTau.MockTheta5
 import RamanujanTau.MockTheta5Series
 import RamanujanTau.MockTheta5Lemmas
 import RamanujanTau.MockTheta5Defs
+import RamanujanTau.MockTheta5Bailey
