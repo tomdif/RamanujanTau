@@ -54,4 +54,14 @@ lemma gaussBinom_eq_zero_of_lt : ∀ {n k : ℕ}, n < k → gaussBinom n k = 0 :
   | succ m ih => rw [gaussBinom_succ_succ, ih, gaussBinom_eq_zero_of_lt (Nat.lt_succ_self m),
                      mul_zero, add_zero]
 
+/-- the q-integer: `[n,1]_q = 1 + q + ⋯ + q^{n-1}`. -/
+lemma gaussBinom_one (n : ℕ) : gaussBinom n 1 = ∑ i ∈ Finset.range n, X ^ i := by
+  induction n with
+  | zero => rfl
+  | succ m ih =>
+      rw [gaussBinom_succ_succ, gaussBinom_zero_right, ih, pow_one, Finset.mul_sum,
+          Finset.sum_range_succ']
+      simp only [pow_zero, ← pow_succ']
+      ring
+
 end MockTheta5.Bailey
