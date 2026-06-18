@@ -25,3 +25,4 @@ import RamanujanTau.Congruences.Mod23
 import RamanujanTau.MathlibBridge
 import RamanujanTau.MockTheta5
 import RamanujanTau.MockTheta5Series
+import RamanujanTau.MockTheta5Lemmas
