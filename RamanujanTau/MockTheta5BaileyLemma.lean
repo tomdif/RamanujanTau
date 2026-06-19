@@ -56,11 +56,11 @@ theorem bailey_inner_zero (r : ℕ) :
 **Status update:** `bailey_inner` is now PROVED — see `MockTheta5QChu.bailey_inner` (the q-Chu–Vandermonde
 core), via the generalized `F m b = 1` and its Bailey-chain recurrence. No `sorry`, axioms propext/Choice/Quot.
 
-What remains for the *full unconditional* limiting Bailey's lemma
-`IsBaileyPair α β → IsBaileyPair (chainAlpha α) (chainBeta β)`: substitute the Bailey relation into
-`chainBeta`, swap the double sum, and apply `bailey_inner` to the inner sum. The mathematics is verified
-(chain-preservation holds numerically to order 40); what's left is the mechanical `Ring.inverse`/`qfac`
-sum-swap bookkeeping (using `rfac_mul_qfac : rfac s t * qfac s = qfac (s+t)`).
+The *full unconditional* limiting Bailey's lemma
+`IsBaileyPair α β → IsBaileyPair (chainAlpha α) (chainBeta β)` is now PROVED too — see
+`MockTheta5BaileyChain.isBaileyPair_chain` (substitute the Bailey relation into `chainBeta`, swap the
+triangular double sum, apply `inner_inv`). Tier 2 of the Bailey campaign is complete; axioms
+propext/Choice/Quot, no `sorry`.
 -/
 
 end MockTheta5.Bailey
