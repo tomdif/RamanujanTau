@@ -53,16 +53,14 @@ theorem bailey_inner_zero (r : ℕ) :
   simp [rfac]
 
 /-
-**The remaining goal (the wall), stated for the record (NOT a `sorry`-backed claim):**
+**Status update:** `bailey_inner` is now PROVED — see `MockTheta5QChu.bailey_inner` (the q-Chu–Vandermonde
+core), via the generalized `F m b = 1` and its Bailey-chain recurrence. No `sorry`, axioms propext/Choice/Quot.
 
-    theorem bailey_inner (m r : ℕ) :
-        ∑ i ∈ Finset.range (m + 1),
-          X ^ (i ^ 2 + 2 * r * i) * gaussBinom m i * rfac (2 * r + i) (m - i) = 1
-
-Given `bailey_inner`, limiting Bailey's lemma `IsBaileyPair α β → IsBaileyPair (chainAlpha α) (chainBeta β)`
-follows by substituting the Bailey relation into `chainBeta`, swapping the double sum, and applying
-`bailey_inner` to the inner sum (the `Ring.inverse` bookkeeping is mechanical). Both remain to be done:
-`bailey_inner` is the q-Chu–Vandermonde core; the reduction is the inverse-form sum-swap.
+What remains for the *full unconditional* limiting Bailey's lemma
+`IsBaileyPair α β → IsBaileyPair (chainAlpha α) (chainBeta β)`: substitute the Bailey relation into
+`chainBeta`, swap the double sum, and apply `bailey_inner` to the inner sum. The mathematics is verified
+(chain-preservation holds numerically to order 40); what's left is the mechanical `Ring.inverse`/`qfac`
+sum-swap bookkeeping (using `rfac_mul_qfac : rfac s t * qfac s = qfac (s+t)`).
 -/
 
 end MockTheta5.Bailey
