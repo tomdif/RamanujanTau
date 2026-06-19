@@ -37,3 +37,4 @@ import RamanujanTau.MockTheta5BaileyTier3
 import RamanujanTau.MockTheta5JacobiTriple
 import RamanujanTau.MockTheta5JacobiBilateral
 import RamanujanTau.MockTheta5JacobiFinite
+import RamanujanTau.MockTheta5JacobiLimit
