@@ -56,3 +56,5 @@ import RamanujanTau.MockTheta5GaussTheta
 import RamanujanTau.MockTheta5AltTheta
 -- Euler's pentagonal number theorem (statement side; proof = pending substitution build)
 import RamanujanTau.MockTheta5Pentagonal
+-- Parity decomposition of the theta series (combining the z=±1 evaluations)
+import RamanujanTau.MockTheta5ThetaCombination
