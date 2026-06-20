@@ -58,3 +58,5 @@ import RamanujanTau.MockTheta5AltTheta
 import RamanujanTau.MockTheta5Pentagonal
 -- Parity decomposition of the theta series (combining the z=±1 evaluations)
 import RamanujanTau.MockTheta5ThetaCombination
+-- Euler's distinct = odd partition theorem (generating-function form)
+import RamanujanTau.MockTheta5EulerDistinctOdd
