@@ -42,4 +42,17 @@ lemma prodSZ_apply (p r : ℕ) (N : ℤ) :
   rw [laurentSum_apply]
   simp_rw [laurentSum_apply, Finsupp.single_apply, ← sub_eq_add_neg]
 
+/-! ### Recognising the diagonal summand as `E2 (rectTerm N j)` -/
+
+lemma E2_X_pow (e : ℕ) : E2 (X ^ e : PowerSeries ℤ) = X ^ (2 * e) := by
+  rw [map_pow, E2_X, ← pow_mul]
+
+/-- `q^{N²}·E2(rectTerm N j)` is exactly the assembled `szc`-product summand
+`q^{(N+j)²}/(q²;q²)_{N+j} · q^{j²}/(q²;q²)_j`, via `(N+j)²+j² = N²+2(j²+Nj)`. -/
+lemma E2_rectTerm (N j : ℕ) :
+    X ^ (N ^ 2) * E2 (rectTerm N j)
+      = X ^ ((N + j) ^ 2) * Ring.inverse (E2 (qfac (N + j))) *
+          (X ^ (j ^ 2) * Ring.inverse (E2 (qfac j))) := by
+  rw [rectTerm, map_mul, map_mul, E2_X_pow, E2_inverse_qfac, E2_inverse_qfac]; ring
+
 end MockTheta5.JTP
