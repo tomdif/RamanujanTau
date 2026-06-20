@@ -68,3 +68,5 @@ import RamanujanTau.MockTheta5OddPairing
 import RamanujanTau.MockTheta5DistinctSplit
 -- Gauss theta in classical product form (Cauchy/Euler sum=product)
 import RamanujanTau.MockTheta5GaussProduct
+-- Alternating theta in classical product form
+import RamanujanTau.MockTheta5AltProduct
