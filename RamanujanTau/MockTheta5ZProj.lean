@@ -36,4 +36,73 @@ noncomputable def zProj (n : ℤ) (φ : PowerSeries (LaurentPolynomial ℤ)) : P
 lemma zProj_add (n : ℤ) (a b : PowerSeries (LaurentPolynomial ℤ)) :
     zProj n (a + b) = zProj n a + zProj n b := by ext m; simp [map_add]
 
+lemma zProj_zero (n : ℤ) : zProj n (0 : PowerSeries (LaurentPolynomial ℤ)) = 0 := by
+  ext m; simp only [coeff_zProj, map_zero]; exact Finsupp.zero_apply
+
+/-- `zProj n` commutes with finite sums (it is an additive coefficient-extraction). -/
+lemma zProj_sum (n : ℤ) (s : Finset ℕ) (f : ℕ → PowerSeries (LaurentPolynomial ℤ)) :
+    zProj n (∑ i ∈ s, f i) = ∑ i ∈ s, zProj n (f i) := by
+  induction s using Finset.induction_on with
+  | empty => exact zProj_zero n
+  | @insert a s h ih => rw [Finset.sum_insert h, Finset.sum_insert h, zProj_add, ih]
+
+/-! ### Projections of the two one-sided Cauchy sums
+
+The `T^n`-coefficient of each Cauchy term is read off by `single_eq_C_mul_T → single_apply`
+(sidestepping the `LaurentPolynomial.C` coercion), and `zProj` is then pushed through the defining
+finite sum by `zProj_sum`. The upshot: the `z`-degree-`k` slice of `SZ` (and the `z^{-k}` slice of
+`SZinv`) is exactly the `k`-th Cauchy coefficient `q^{k²}/(q²;q²)_k`. -/
+section Projections
+open MockTheta5.Bailey
+
+/-- the `T^n` coefficient of `SZterm k` at q-degree `m`. -/
+lemma SZterm_apply (k m : ℕ) (n : ℤ) :
+    (coeff m (SZterm k)) n = if (k : ℤ) = n then coeff m (X ^ (k ^ 2) * Ring.inverse (E2 (qfac k))) else 0 := by
+  rw [SZterm, PowerSeries.coeff_mul_C, cauchyCoef, PowerSeries.coeff_map,
+      ← LaurentPolynomial.single_eq_C_mul_T, Finsupp.single_apply]
+
+lemma zProj_SZterm (k : ℕ) (n : ℤ) :
+    zProj n (SZterm k) = if (k : ℤ) = n then X ^ (k ^ 2) * Ring.inverse (E2 (qfac k)) else 0 := by
+  ext m; rw [coeff_zProj, SZterm_apply]; split_ifs with h <;> simp
+
+lemma zProj_SZfinite (k M : ℕ) (h : k < M) :
+    zProj (k : ℤ) (SZfinite M) = X ^ (k ^ 2) * Ring.inverse (E2 (qfac k)) := by
+  rw [SZfinite, zProj_sum,
+      Finset.sum_eq_single k
+        (fun i _ hik => by rw [zProj_SZterm, if_neg (by exact_mod_cast hik)])
+        (fun hk => absurd (Finset.mem_range.mpr h) hk),
+      zProj_SZterm, if_pos rfl]
+
+/-- **z-degree-`k` projection of `SZ`** = the `k`-th Cauchy coefficient `q^{k²}/(q²;q²)_k`. -/
+lemma zProj_SZ (k : ℕ) : zProj (k : ℤ) SZ = X ^ (k ^ 2) * Ring.inverse (E2 (qfac k)) := by
+  ext m
+  rw [coeff_zProj, coeff_SZ (show m + 1 ≤ m + k + 1 by omega), ← coeff_zProj,
+      zProj_SZfinite k (m + k + 1) (by omega)]
+
+lemma SZinvTerm_apply (k m : ℕ) (n : ℤ) :
+    (coeff m (SZinvTerm k)) n =
+      if (-(k : ℤ)) = n then coeff m (X ^ (k ^ 2) * Ring.inverse (E2 (qfac k))) else 0 := by
+  rw [SZinvTerm, PowerSeries.coeff_mul_C, cauchyCoef, PowerSeries.coeff_map,
+      ← LaurentPolynomial.single_eq_C_mul_T, Finsupp.single_apply]
+
+lemma zProj_SZinvTerm (k : ℕ) (n : ℤ) :
+    zProj n (SZinvTerm k) = if (-(k : ℤ)) = n then X ^ (k ^ 2) * Ring.inverse (E2 (qfac k)) else 0 := by
+  ext m; rw [coeff_zProj, SZinvTerm_apply]; split_ifs with h <;> simp
+
+lemma zProj_SZinvFinite (k M : ℕ) (h : k < M) :
+    zProj (-(k : ℤ)) (SZinvFinite M) = X ^ (k ^ 2) * Ring.inverse (E2 (qfac k)) := by
+  rw [SZinvFinite, zProj_sum,
+      Finset.sum_eq_single k
+        (fun i _ hik => by rw [zProj_SZinvTerm, if_neg (by simpa only [neg_inj, Nat.cast_inj] using hik)])
+        (fun hk => absurd (Finset.mem_range.mpr h) hk),
+      zProj_SZinvTerm, if_pos rfl]
+
+/-- **z-degree-`(-k)` projection of `SZinv`** = `q^{k²}/(q²;q²)_k` (the mirror of `zProj_SZ`). -/
+lemma zProj_SZinv (k : ℕ) : zProj (-(k : ℤ)) SZinv = X ^ (k ^ 2) * Ring.inverse (E2 (qfac k)) := by
+  ext m
+  rw [coeff_zProj, coeff_SZinv (show m + 1 ≤ m + k + 1 by omega), ← coeff_zProj,
+      zProj_SZinvFinite k (m + k + 1) (by omega)]
+
+end Projections
+
 end MockTheta5.JTP
