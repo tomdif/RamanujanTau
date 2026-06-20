@@ -64,3 +64,5 @@ import RamanujanTau.MockTheta5EulerDistinctOdd
 import RamanujanTau.MockTheta5EvenOdd
 -- Odd-index pairing (distinct odd parts × odd parts)
 import RamanujanTau.MockTheta5OddPairing
+-- Distinct even/odd split
+import RamanujanTau.MockTheta5DistinctSplit
