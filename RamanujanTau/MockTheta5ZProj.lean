@@ -105,4 +105,34 @@ lemma zProj_SZinv (k : ℕ) : zProj (-(k : ℤ)) SZinv = X ^ (k ^ 2) * Ring.inve
 
 end Projections
 
+/-! ### The z-degree-0 prefactor law
+
+`qfac2InfL = map C (q²;q²)_∞` lives entirely in z-degree 0, so it commutes out of any z-projection
+as the scalar power series `(q²;q²)_∞`. This is the easy half of the Cauchy product (one factor is a
+z-scalar); the genuine z-Cauchy product `SZ · SZinv` is handled separately. -/
+section Prefactor
+open MockTheta5.Bailey
+
+/-- finset-sum of `LaurentPolynomial`s, applied at a z-degree (through the `def`-opacity via `show`). -/
+lemma laurentSum_apply {ι : Type*} (s : Finset ι) (f : ι → LaurentPolynomial ℤ) (a : ℤ) :
+    (∑ i ∈ s, f i) a = ∑ i ∈ s, (f i) a := by
+  show (∑ i ∈ s, f i : ℤ →₀ ℤ) a = _
+  rw [Finsupp.finsetSum_apply]
+
+/-- `(C a · g)` applied at a z-degree: the constant scales the coefficient. -/
+lemma C_mul_apply (a : ℤ) (g : LaurentPolynomial ℤ) (n : ℤ) :
+    (LaurentPolynomial.C a * g) n = a * g n := by
+  rw [← LaurentPolynomial.single_eq_C]; exact AddMonoidAlgebra.single_zero_mul_apply g a n
+
+/-- **prefactor law**: `qfac2InfL` is z-degree-0, so it factors out of any z-projection. -/
+lemma zProj_qfac2InfL_mul (n : ℤ) (Y : PowerSeries (LaurentPolynomial ℤ)) :
+    zProj n (qfac2InfL * Y) = qfac2Inf * zProj n Y := by
+  ext m
+  rw [coeff_zProj, PowerSeries.coeff_mul, laurentSum_apply, PowerSeries.coeff_mul]
+  apply Finset.sum_congr rfl
+  intro p _
+  rw [qfac2InfL, PowerSeries.coeff_map, C_mul_apply, coeff_zProj]
+
+end Prefactor
+
 end MockTheta5.JTP
