@@ -76,3 +76,5 @@ import RamanujanTau.MockTheta5EulerPartialTheta
 import RamanujanTau.MockTheta5DistinctEvenTheta
 -- The classical (product-form) Jacobi triple product
 import RamanujanTau.MockTheta5ClassicalJTP
+-- The Bailey-transform limit (Rogers-Ramanujan engine)
+import RamanujanTau.MockTheta5BaileyTransform
