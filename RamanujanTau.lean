@@ -74,3 +74,5 @@ import RamanujanTau.MockTheta5AltProduct
 import RamanujanTau.MockTheta5EulerPartialTheta
 -- Partial-theta representation of (-q^2;q^2)_inf
 import RamanujanTau.MockTheta5DistinctEvenTheta
+-- The classical (product-form) Jacobi triple product
+import RamanujanTau.MockTheta5ClassicalJTP
