@@ -33,6 +33,7 @@ import RamanujanTau.MockTheta5BaileyPair
 import RamanujanTau.MockTheta5BaileyLemma
 import RamanujanTau.MockTheta5QChu
 import RamanujanTau.MockTheta5BaileyChain
+import RamanujanTau.MockTheta5BaileyQ
 import RamanujanTau.MockTheta5BaileyTier3
 import RamanujanTau.MockTheta5JacobiTriple
 import RamanujanTau.MockTheta5JacobiBilateral
