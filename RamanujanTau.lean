@@ -80,5 +80,6 @@ import RamanujanTau.MockTheta5ClassicalJTP
 -- The Bailey-transform limit (Rogers-Ramanujan engine)
 import RamanujanTau.MockTheta5BaileyTransform
 import RamanujanTau.MockTheta5BaileyQTransform
+import RamanujanTau.MockTheta5BaileyQPairA
 -- Fifth-order mock-theta relation R1: infinite statement + engine scoping
 import RamanujanTau.MockTheta5R1

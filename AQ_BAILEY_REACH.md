@@ -37,10 +37,17 @@ Both bilateral thetas are exactly the `Σ_{n∈ℤ} zⁿ Q^{n²}` shape that `cl
 turns into a product — so these are reachable **without** the `q^{1/2}` product-side flatten that blocks the
 pentagonal/RR route elsewhere.
 
-## Next milestone (to make Identity A a sorry-free theorem)
-Only one lemma is missing: the finite `a=q` Bailey identity
-`Σ_{r≤n} (−1)ʳ(q^{r²}−q^{(r+1)²})/((1−q)(q;q)_{n-r}(q²;q)_{n+r}) = 1/(q²;q²)ₙ`
-(i.e. `IsBaileyPairQ α β` for the explicit telescoping `α`). Unlike the seed and the shared `F_eq_one` core,
-this does not collapse to a single Gaussian binomial and needs its own induction (a fresh `F`-style
-generalization). With it, `bailey_transform_q` + the bilateral-theta reindex `Σ_{n≥0}(...) = Σ_{n∈ℤ}(...)`
-+ the JTP close Identity A end-to-end.
+## Gap CLOSED (`MockTheta5BaileyQPairA.lean`, axiom-clean, no `sorry`)
+The finite `a=q` Bailey identity `IsBaileyPairQ α β` for the explicit `α` (`isBaileyPairQ_A`) is now proven.
+It does not collapse to the shared `F_eq_one` core (the mixed-Pochhammer ratio is a genuine infinite series),
+so it is proved by **creative telescoping**: `S(n) := Σ_{r≤n} αᵣ/((q;q)_{n-r}(q²;q)_{n+r})` satisfies
+`(1-q^{2n})·S(n) = S(n-1)` (`Ssum_rec`) via the explicit certificate
+`G(n,r) = (−1)^{r+1} q^{n+r(r-1)}(1+···+q^{2r-1})(1−q^{n+r+1})/((q;q)_{n-r}(q²;q)_{n+r})`, whose term-wise
+identity (`lemA`) is a pure `ring` fact after clearing `(q²;q)`→`(q;q)` and using `geom(m)(1−q)=1−q^m`.
+Feeding the pair into `bailey_transform_q` gives Identity A as `Σ q^{n²+n}/(q²;q²)_n = (1/(q²;q)_∞)·Σ q^{n²+n}αₙ`
+(`identityA_transform`).
+
+Remaining (optional, to reach the closed bilateral-theta/product RHS): evaluate `Σ q^{n²+n} αₙ` as the
+bilateral theta `Σ_{n∈ℤ}(−1)ⁿq^{2n²+n}` (reindex `Σ_{n≥0}→Σ_{n∈ℤ}`) via the JTP — a repackaging, not a new
+obstruction. (Note the LHS `Σ q^{n²+n}/(q²;q²)_n` also equals `(−q²;q²)_∞` by the repo's Euler identity
+`E2prodOnePlus_eq_pthetaPosSum`.)
