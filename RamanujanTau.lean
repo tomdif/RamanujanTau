@@ -81,5 +81,6 @@ import RamanujanTau.MockTheta5ClassicalJTP
 import RamanujanTau.MockTheta5BaileyTransform
 import RamanujanTau.MockTheta5BaileyQTransform
 import RamanujanTau.MockTheta5BaileyQPairA
+import RamanujanTau.MockTheta5BaileyQPairB
 -- Fifth-order mock-theta relation R1: infinite statement + engine scoping
 import RamanujanTau.MockTheta5R1
